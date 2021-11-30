@@ -844,6 +844,25 @@ def test_transform_intents_for_file_default():
     assert transformed == expected
 
 
+def test_transform_intents_for_files_with_entities():
+    domain_path = "data/test_domains/test_domain_from_directory2"
+    domain = Domain.load(domain_path)
+    transformed = domain._transform_intents_for_file()
+
+    expected = [
+        {"greet": {"use_entities": ["country"]}},
+        {"goodbye": {"use_entities": []}},
+        {"affirm": {"use_entities": True}},
+        {"deny": {"use_entities": True}},
+        {"mood_great": {"use_entities": True}},
+        {"mood_unhappy": {"use_entities": True}},
+        {"bot_challenge": {"use_entities": True}},
+        {"inform": {"use_entities": ["city"]}},
+    ]
+
+    assert transformed == expected
+
+
 def test_transform_intents_for_file_with_mapping():
     domain_path = "data/test_domains/default_with_mapping.yml"
     domain = Domain.load(domain_path)
