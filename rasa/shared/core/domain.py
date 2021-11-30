@@ -308,7 +308,9 @@ class Domain:
         return self.__class__.from_dict(combined)
 
     @staticmethod
-    def merge_domain_dicts(domain1, domain2, override: bool = False) -> Dict[Text, Any]:
+    def merge_domain_dicts(
+        domain1: Dict, domain2: Dict, override: bool = False
+    ) -> Dict[Text, Any]:
         """Merge this domain with another one, combining their attributes.
 
         List attributes like ``intents`` and ``actions`` will be deduped
@@ -382,7 +384,6 @@ class Domain:
             combined[key] = merge_dicts(
                 combined.get(key, {}), domain_dict.get(key, {}), override
             )
-
         return combined  # self.__class__.from_dict(combined)
 
     @staticmethod
