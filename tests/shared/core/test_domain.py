@@ -850,11 +850,12 @@ def test_transform_intents_for_files_with_entities():
     transformed = domain._transform_intents_for_file()
 
     expected = [
+        {"question": {"use_entities": True}},
         {"play": {"use_entities": ["ball", "chess"]}},
         {"stow_away": {"use_entities": True}},
         {
             "support_banning": {
-                "use_entities": ["automatic_rifles", "anti_person_land_mines"]
+                "use_entities": ["anti_person_land_mines", "automatic_rifles"]
             }
         },
         {"certify": {"use_entities": True}},
