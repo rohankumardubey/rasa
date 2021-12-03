@@ -649,28 +649,29 @@ def test_collect_intent_properties(
 
 
 def test_load_domain_from_directory_tree(tmp_path: Path):
-    root_domain = {"actions": ["utter_root", "utter_root2"]}
+    root_domain = {"intents": ["utter_root", "utter_root2"]}
     utils.dump_obj_as_yaml_to_file(tmp_path / "domain_pt1.yml", root_domain)
 
     subdirectory_1 = tmp_path / "Skill 1"
     subdirectory_1.mkdir()
-    skill_1_domain = {"actions": ["utter_skill_1"]}
+    skill_1_domain = {"intents": ["utter_skill_1"]}
     utils.dump_obj_as_yaml_to_file(subdirectory_1 / "domain_pt2.yml", skill_1_domain)
 
     subdirectory_2 = tmp_path / "Skill 2"
     subdirectory_2.mkdir()
-    skill_2_domain = {"actions": ["utter_skill_2"]}
+    skill_2_domain = {"intents": ["utter_skill_2"]}
     utils.dump_obj_as_yaml_to_file(subdirectory_2 / "domain_pt3.yml", skill_2_domain)
 
     subsubdirectory = subdirectory_2 / "Skill 2-1"
     subsubdirectory.mkdir()
-    skill_2_1_domain = {"actions": ["utter_subskill", "utter_root"]}
+    skill_2_1_domain = {"intents": ["utter_subskill", "utter_root"]}
     # Check if loading from `.yaml` also works
     utils.dump_obj_as_yaml_to_file(
         subsubdirectory / "domain_pt4.yaml", skill_2_1_domain
     )
 
     actual = Domain.load(str(tmp_path))
+
     expected = [
         "utter_root",
         "utter_root2",
